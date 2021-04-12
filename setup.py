@@ -21,7 +21,7 @@ setuptools.setup(
     author_email="massimiliano.galli.95@gmail.com",
     description="Package for Run 2 differential combination",
     packages=setuptools.find_packages(),
-    scripts=["scripts/combine_datacards.py"],
+    scripts=["scripts/combine_datacards.py", "scripts/convert_datacard.py"],
     install_requires=[
         ],
     python_requires="==2.7.18"
