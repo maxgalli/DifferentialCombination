@@ -38,8 +38,7 @@ python setup.py install --home=~/install_dir
 This analysis is built using as initial inputs the datacards and workspaces used to produce the results for [this analysis](https://github.com/tklijnsma/differentialCombination2017) and  
 available [here](https://github.com/tklijnsma/input-diffcomb-HIG17028).  
   
-The folder ```inputs/2017``` is thus filled with datacards, workspaces and root files produces following [these instructions](https://github.com/tklijnsma/differentialCombination2017/wik  
-i).  
+The folder ```inputs/2017``` is thus filled with datacards, workspaces and root files produces following [these instructions](https://github.com/tklijnsma/differentialCombination2017/wiki).  
   
 More specifically, we run [the commands](https://github.com/tklijnsma/differentialCombination2017/wiki/3-Running-text2workspace#t2ws-for-differential-cross-sections) to produce the works  
 paces and copy them to the according subfolder. The datacards used to produce the workspaces (through Combine's ```text2workspace.py```) are also copied and are printed when running the  
