@@ -1,4 +1,5 @@
 import os
+import yaml
 import logging
 logger = logging.getLogger(__name__)
 
@@ -33,3 +34,10 @@ def create_and_access_nested_dir(path_to_dir):
     os.system("mkdir -p {}".format(final_path))
     logger.info("Moving to {}".format(final_path))
     os.chdir(final_path)
+
+
+def extract_from_yaml_file(path_to_file):
+    with open(path_to_file) as fl:
+        dct = yaml.load(fl, Loader=yaml.FullLoader)
+    
+    return dct

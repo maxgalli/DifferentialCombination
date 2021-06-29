@@ -24,7 +24,8 @@ setuptools.setup(
     scripts=[
         "scripts/combine_datacards.py", 
         "scripts/convert_datacard.py",
-        "scripts/submit_scans.py"
+        "scripts/submit_scans.py",
+        "scripts/plot_xs_scans.py"
         ],
     install_requires=[
         ],

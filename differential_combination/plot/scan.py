@@ -7,6 +7,24 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class DifferentialSpectrum:
+    """ Basically a collection of Scan instances, one per POI, for a single category 
+    """
+    def __init__(self, variable, category, pois, input_dir):
+        logger.info("Building a DifferentialSpectrum for variable {} and category {} with the following POIs {}".format(variable, category, pois))
+        self.variable = variable
+        self.category = category
+        self.scans = {}
+        for poi in pois:
+            try:
+                self.scans[poi] = Scan(poi, input_dir)
+            # this is the case in which there are no scans for poi in input_dir, but we are looking
+            # for them anyways because the list of pois is taken from the metadata
+            # IOError is raised by uproot.concatenate when no files matching the regex are found
+            except IOError:
+                logger.warning("Attempted to fetch scan results for POI {}, but no files where found".format(poi))
+                pass
+
 
 class Scan:
     """
