@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import logging
 logger = logging.getLogger(__name__)
 
+from .cosmetics import CMS
+plt.style.use(CMS)
+
 
 class DifferentialSpectrum:
     """ Basically a collection of Scan instances, one per POI, for a single category 
@@ -83,12 +86,24 @@ class Scan:
         self.up_uncertainty = abs(self.minimum[0] - self.up[0])
 
 
-    def plot(self, ax):
+    def plot(self, ax, color=None):
         logger.info("Plotting scan for {}".format(self.poi))
         # Restrict the plotted values to a dnll less than 3.5
         x = self.poi_values[self.two_dnll < 3.5]
         y = self.two_dnll[self.two_dnll < 3.5]
-        plt.plot(x, y)
-        ax.axvline(self.minimum[0])
-        plt.plot([self.down[0], self.up[0]], [self.down[1], self.up[1]], "go")
+        ax.plot(x, y, color=color, label=self.poi)
+        # Vertical line passing through the minimum
+        ax.plot(
+            [self.minimum[0], self.minimum[0]], [self.minimum[1], self.up[1]], 
+            color=color,
+            linestyle="--"
+        )
+        # Points where NLL crosses 1
+        ax.plot(
+            [self.down[0], self.up[0]], [self.down[1], self.up[1]], 
+            color=color,
+            linestyle="",
+            marker="o"
+            )
+        
         return ax

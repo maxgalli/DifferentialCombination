@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
+from .cosmetics import black_to_grey, rainbow
 
+# Silence matplotlib warnings for Christ sake
+import warnings
+warnings.filterwarnings("ignore", module="matplotlib")
 
 
 class Figure:
@@ -17,11 +21,27 @@ class XSNLLsPerPOI(Figure):
     """
     """
     def __init__(self, differential_spectrum):
+        self.ds = differential_spectrum
         self.fig, self.ax = plt.subplots()
         self.output_name = "NLLs_{}_{}".format(
-            differential_spectrum.variable, differential_spectrum.category
+            self.ds.variable, self.ds.category
             )
+
+        # Set labels
+        self.ax.set_xlabel(self.ds.variable)
+        self.ax.set_ylabel("-2$\Delta$lnL")
+
+        # Set limits
+        self.ax.set_ylim(0., 4.)
+
+        # Draw horizontal line at 1
+        self.ax.axhline(1., color="k", linestyle="--")
         
         # Draw all the NLLs on the ax
+        color_index = 0
         for poi, scan in differential_spectrum.scans.items():
-            self.ax = scan.plot(self.ax)
+            self.ax = scan.plot(self.ax, rainbow[color_index])
+            color_index += 1
+
+        # Legend
+        self.ax.legend()

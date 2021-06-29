@@ -28,9 +28,15 @@ Remember that running ```cmsenv``` from inside ```CMSSW_11_2_0_pre10/src``` has 
 In this case, installing the package is a bit more complicated since we don't have privileges on the ```cvmfs``` directories.
 To install in a specific directory (e.g. ```~/install_dir```) the process consists in the following:
 ```
-source setup_cmssw112_env.sh ~/install_dir
+source setup_cmssw112_env.sh full_path_to_install_dir
+python install -e . --prefix=../install_dir
+```
+
+or
+```
 python setup.py install --home=~/install_dir
 ```
+
 
 ### Working
 The suggested way to work (at the moment of writing, 24.06.21) is to have a main directory ```DifferentialCombination_home``` that looks like:
@@ -42,6 +48,13 @@ The suggested way to work (at the moment of writing, 24.06.21) is to have a main
 ```
 where ```DifferentialCombination``` is this very repo, ```install_dir``` is where we install the package (assuming we're not working with conda, because in that case we could easily install in the default directories) and ```outputs``` is all the relevant outputs end up.
 The drawback is that every time a change is implemented, ```python setup.py install --home=../install_dir``` has to be re-run from inside the repo, but at least we keep the clone clean. This also allows us to run the scripts that are installed from wherever we want.
+
+A better option consists in running, from inside ```DifferentialCombination```, the command 
+```
+pip install -e . --prefix=../install_dir
+```
+
+**NB**: when running shell scripts like e.g. ```setup_cmssw12_env.sh```, the path to the installation directory should be absolute, since this value is passed to ```PYTHONPATH```.
 
 
 ## Inputs  

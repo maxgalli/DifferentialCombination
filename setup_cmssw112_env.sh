@@ -7,9 +7,9 @@ if [[ -z $install_dir ]]; then
 fi
 
 if [[ -z "${PYTHONPATH}" ]]; then
-    export PYTHONPATH="${install_dir}/lib/python/"
+    export PYTHONPATH="${install_dir}/lib/python2.7/site-packages"
 else
-    export PYTHONPATH="$PYTHONPATH:${install_dir}/lib/python/"
+    export PYTHONPATH="$PYTHONPATH:${install_dir}/lib/python2.7/site-packages"
 fi
 
 export PATH=$PATH:"${install_dir}/bin/"
