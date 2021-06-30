@@ -23,21 +23,14 @@ def parse_arguments():
             "--category",
             required=True,
             type=str,
-            help="Category for which submit scans",
-            choices=[
-                "Hgg",
-                "Hzz",
-                "Hbb",
-                "Combination",
-                "CombWithHbb"
-            ]
+            help="Category for which submit scans"
             )
     
     parser.add_argument(
-        "--metadata",
+        "--metadata-dir",
         type=str,
-        default="DifferentialCombination/metadata/xs_scans_specs.yml",
-        help="Directory where .yaml files with metadata are stored"
+        default="outputs",
+        help="Directory where the .yaml files with metadata are stored"
     )
 
     parser.add_argument(
@@ -66,7 +59,12 @@ def main(args):
     # Assign from args
     variable = args.variable
     category = args.category
-    metadata_yml_file = args.metadata
+    try:
+        metadata_yml_file = "{}/{}.yml".format(args.metadata_dir, category)
+    except:
+        raise FileNotFoundError("Mismatch: category is {} but no file {}.yml found in {}".format(
+            category, category, args.metadata_dir
+        ))
 
     if args.input_dir.startswith("/"):
         input_dir = args.input_dir
