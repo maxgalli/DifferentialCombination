@@ -1,6 +1,10 @@
 import argparse
-import matplotlib.pyplot as plt
 import os
+
+# Needed to fix the fucking 
+# _tkinter.TclError: couldn't connect to display "localhost:12.0"
+import matplotlib
+matplotlib.use("AGG")
 
 from differential_combination.utils import setup_logging, extract_from_yaml_file
 from differential_combination.plot.scan import Scan, DifferentialSpectrum
@@ -11,6 +15,14 @@ def parse_arguments():
     parser = argparse.ArgumentParser(
             description="Produce XS plots"
             )
+
+    parser.add_argument(
+        "--level",
+        type=str,
+        default="INFO",
+        choices=["INFO", "DEBUG"],
+        help="Level of logger"
+    )
 
     parser.add_argument(
             "--variable",
@@ -40,11 +52,17 @@ def parse_arguments():
         help="Directory where output files will be stored"
     )
 
+    parser.add_argument(
+        "--single-category",
+        type=str,
+        help="Dump NLL plots for a single category instead of looping on all of them"
+    )
+
     return parser.parse_args()
 
 
 def main(args):
-    logger = setup_logging()
+    logger = setup_logging(args.level)
     variable = args.variable
     input_dir = args.input_dir
     metadata_dir = args.metadata_dir
@@ -53,16 +71,24 @@ def main(args):
 
     # First produce NLL plots, one for each category
     # Each containing the NLL curves for each POI
-    for fl in os.listdir(metadata_dir):
+    if args.single_category:
+        logger.info("Producing NLL plot only for {}".format(args.single_category))
+        categories_yamls = ["{}.yml".format(args.single_category)]
+    else:
+        categories_yamls = os.listdir(metadata_dir)
+    for fl in categories_yamls:
         full_path_to_file = "{}/{}".format(metadata_dir, fl)
         # Based on the assumption that we have a config file for each category called 'category_name.yaml'
         category = fl.split(".")[0]
         metadata_dct = extract_from_yaml_file(full_path_to_file)
+        categories_numbers = [directory for directory in os.listdir(input_dir) if category in directory]
+        logger.debug("Will look into the following directories: {}".format(categories_numbers))
+        category_input_dirs = ["{}/{}".format(input_dir, directory) for directory in categories_numbers]
 
         # metadata_dct has the format {"binning": {"poi1": [], "poi2": []}}
         pois = list(metadata_dct["binning"].keys())
 
-        diff_spectrum = DifferentialSpectrum(variable, category, pois, input_dir)
+        diff_spectrum = DifferentialSpectrum(variable, category, pois, category_input_dirs)
 
         plot_to_dump = XSNLLsPerPOI(diff_spectrum)
         plot_to_dump.dump(output_dir)
