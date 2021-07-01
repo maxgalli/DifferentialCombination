@@ -1,0 +1,108 @@
+path_to_root_file:
+  ws_njets_hgg.root
+batch_config:
+  job-mode: slurm
+  sub-opts: "'--mem=5G'"
+global_fit:
+  options:
+    method: MultiDimFit # --method MultiDimFit
+    mass: 125.0 # --mass 125.0
+    cminDefaultMinimizerType: Minuit2 # --cminDefaultMinimizerType Minuit2
+    cminDefaultMinimizerAlgo: Migrad # --cminDefaultMinimizerAlgo Migrad
+    cminDefaultMinimizerStrategy: 0 # --cminDefaultMinimizerStrategy 0
+    cminDefaultMinimizerTolerance: 0.1 # --cminDefaultMinimizerTolerance 0.1
+    saveNLL: True # --saveNLL
+    saveInactivePOI: 1 # --saveInactivePOI 1
+    floatOtherPOIs: 1 # --floatOtherPOIs 1
+    saveWorkspace: True
+fit_per_bin:
+  r_smH_NJ_0:
+    default_value: 1.0 # Feeds --setParameters flag in combine and combineTool
+    range: [-1.0, 4] # Feeds --setParameterRanges flag in combine and combineTool
+    options:
+      method: MultiDimFit # --method MultiDimFit
+      mass: 125.0 # --mass 125.0
+      cminDefaultMinimizerType: Minuit2 # --cminDefaultMinimizerType Minuit2
+      cminDefaultMinimizerAlgo: Migrad # --cminDefaultMinimizerAlgo Migrad
+      cminDefaultMinimizerStrategy: 0 # --cminDefaultMinimizerStrategy 0
+      cminDefaultMinimizerTolerance: 0.1 # --cminDefaultMinimizerTolerance 0.1
+      saveNLL: True # --saveNLL
+      saveInactivePOI: 1 # --saveInactivePOI 1
+      floatOtherPOIs: 1 # --floatOtherPOIs 1
+      algo: grid
+      snapshotName: MultiDimFit
+      skipInitialFit: True
+      points: 55
+      split-points: 5
+  r_smH_NJ_1:
+    default_value: 1.0 # Feeds --setParameters flag in combine and combineTool
+    range: [-1.0, 4] # Feeds --setParameterRanges flag in combine and combineTool
+    options:
+      method: MultiDimFit # --method MultiDimFit
+      mass: 125.0 # --mass 125.0
+      cminDefaultMinimizerType: Minuit2 # --cminDefaultMinimizerType Minuit2
+      cminDefaultMinimizerAlgo: Migrad # --cminDefaultMinimizerAlgo Migrad
+      cminDefaultMinimizerStrategy: 0 # --cminDefaultMinimizerStrategy 0
+      cminDefaultMinimizerTolerance: 0.1 # --cminDefaultMinimizerTolerance 0.1
+      saveNLL: True # --saveNLL
+      saveInactivePOI: 1 # --saveInactivePOI 1
+      floatOtherPOIs: 1 # --floatOtherPOIs 1
+      algo: grid
+      snapshotName: MultiDimFit
+      skipInitialFit: True
+      points: 55
+      split-points: 5
+  r_smH_NJ_2:
+    default_value: 1.0 # Feeds --setParameters flag in combine and combineTool
+    range: [-1.0, 4] # Feeds --setParameterRanges flag in combine and combineTool
+    options:
+      method: MultiDimFit # --method MultiDimFit
+      mass: 125.0 # --mass 125.0
+      cminDefaultMinimizerType: Minuit2 # --cminDefaultMinimizerType Minuit2
+      cminDefaultMinimizerAlgo: Migrad # --cminDefaultMinimizerAlgo Migrad
+      cminDefaultMinimizerStrategy: 0 # --cminDefaultMinimizerStrategy 0
+      cminDefaultMinimizerTolerance: 0.1 # --cminDefaultMinimizerTolerance 0.1
+      saveNLL: True # --saveNLL
+      saveInactivePOI: 1 # --saveInactivePOI 1
+      floatOtherPOIs: 1 # --floatOtherPOIs 1
+      algo: grid
+      snapshotName: MultiDimFit
+      skipInitialFit: True
+      points: 55
+      split-points: 5
+  r_smH_NJ_3:
+    default_value: 1.0 # Feeds --setParameters flag in combine and combineTool
+    range: [-1.0, 6] # Feeds --setParameterRanges flag in combine and combineTool
+    options:
+      method: MultiDimFit # --method MultiDimFit
+      mass: 125.0 # --mass 125.0
+      cminDefaultMinimizerType: Minuit2 # --cminDefaultMinimizerType Minuit2
+      cminDefaultMinimizerAlgo: Migrad # --cminDefaultMinimizerAlgo Migrad
+      cminDefaultMinimizerStrategy: 0 # --cminDefaultMinimizerStrategy 0
+      cminDefaultMinimizerTolerance: 0.1 # --cminDefaultMinimizerTolerance 0.1
+      saveNLL: True # --saveNLL
+      saveInactivePOI: 1 # --saveInactivePOI 1
+      floatOtherPOIs: 1 # --floatOtherPOIs 1
+      algo: grid
+      snapshotName: MultiDimFit
+      skipInitialFit: True
+      points: 80
+      split-points: 5
+  r_smH_NJ_GE4:
+    default_value: 1.0 # Feeds --setParameters flag in combine and combineTool
+    range: [-1.0, 4] # Feeds --setParameterRanges flag in combine and combineTool
+    options:
+      method: MultiDimFit # --method MultiDimFit
+      mass: 125.0 # --mass 125.0
+      cminDefaultMinimizerType: Minuit2 # --cminDefaultMinimizerType Minuit2
+      cminDefaultMinimizerAlgo: Migrad # --cminDefaultMinimizerAlgo Migrad
+      cminDefaultMinimizerStrategy: 0 # --cminDefaultMinimizerStrategy 0
+      cminDefaultMinimizerTolerance: 0.1 # --cminDefaultMinimizerTolerance 0.1
+      saveNLL: True # --saveNLL
+      saveInactivePOI: 1 # --saveInactivePOI 1
+      floatOtherPOIs: 1 # --floatOtherPOIs 1
+      algo: grid
+      snapshotName: MultiDimFit
+      skipInitialFit: True
+      points: 55
+      split-points: 5
