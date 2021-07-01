@@ -55,7 +55,7 @@ class XSRoutine(Routine):
     - combine + ... for the global fit
     - a combineTool.py for each parameter of interest (to perform the single scans)
     """
-    def __init__(self, category, input_dir, yaml_file):
+    def __init__(self, category, input_dir, yaml_file, single_poi=None):
         self.commands = []
 
         # Read YAML file
@@ -73,7 +73,12 @@ class XSRoutine(Routine):
         self.commands.append(global_fit_command)
 
         # Individual fits commands
-        for poi in full_dict["fit_per_bin"].keys():
+        if single_poi:
+            logger.warning("Creating command in single_poi mode for poi {}".format(single_poi))
+            pois = [single_poi]
+        else:
+            pois = list(full_dict["fit_per_bin"].keys())
+        for poi in pois:
             fit_per_bin_args = dict_to_Command_input(full_dict, poi)
             fit_per_bin_args.insert(0, "--name _SCAN_{}_{}".format(poi, category))
             fit_per_bin_args.append("--task-name _SCAN_{}_{}".format(poi, category))
